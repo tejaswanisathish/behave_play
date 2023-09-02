@@ -58,3 +58,42 @@ def verifying_created_record(context):
     for expected_key, expected_value in expected.items():
         assert str(actual[expected_key]) == expected_value
 
+@given("user sends the api to update user record")
+def update_user_record(context):
+    item_id = 1
+    url = f'http://127.0.0.1:8000/items/{item_id}'
+    data = {'name': 'Test','price': '20','description': 'Testing PUT Method', 'tax': '20','item_id': '1'}
+    response = httpx.put(url, json=data)
+    context.request_status_code = response.status_code
+    context.update_user_record = response.json()
+
+
+@then("Verify if record is updated with following")
+def verifying_updated_record(context):
+    expected =dict(context.table.rows[0].as_dict())
+    actual = getattr(context, "update_user_record", None)
+    if actual is None:
+        raise ValueError("record is not updated")
+    
+    for expected_key, expected_value in expected.items():
+        assert str(actual[expected_key]) == expected_value
+
+
+@given("user sends the api to delete user record")
+def delete_record(context):
+ item_id = 1
+ url = f'http://127.0.0.1:8000/items/{item_id}'
+ response = httpx.delete(url)
+ context.request_status_code = response.status_code
+ context.delete_record = response.json()
+
+@then("Verify if record is deleted as following")
+def verifying_deleted_message(context):
+    expected =dict(context.table.rows[0].as_dict())
+    actual = getattr(context, "delete_record", None)
+
+    if actual is None:
+        raise ValueError("record is not deleted or the message is incorrect")
+    
+    for expected_key, expected_value in expected.items():
+        assert str(actual[expected_key]) == expected_value
