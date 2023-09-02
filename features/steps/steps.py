@@ -11,7 +11,7 @@ def fetch_gender_details(context, name: str):
         context (Behave): Behave context
         name (str): Name of the test user
     """
-    response = httpx.get(url=f"https://api.genderize.io", params={"name":name})
+    response = httpx.get(url="https://api.genderize.io", params={"name":name})
     context.request_status_code = response.status_code
     context.get_gender_response = response.json()
 
