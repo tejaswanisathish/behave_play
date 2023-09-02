@@ -17,6 +17,8 @@ def fetch_gender_details(context, name: str):
 
 @when("the {request_type} request is successful")
 def validate_request_status_code(context, request_type):
+    """This validates request status code
+    """
     actual = getattr(context, "request_status_code", None)
     if actual is None:
         raise ValueError("Unable to fetch status code of the request that fetched gender from Gender API")
@@ -29,6 +31,9 @@ def validate_request_status_code(context, request_type):
 
 @then("the response should be")
 def validate_api_response(context):
+    """Validates API response
+
+    """
     expected = dict(context.table.rows[0].as_dict())
     
     actual = getattr(context, "get_gender_response", None)
@@ -42,6 +47,7 @@ def validate_api_response(context):
 
 @given("user sends the api to create user record")
 def create_user_record(context):
+    """Creates user record on the Test API"""
     url = 'https://reqres.in/api/users'
     data = {'name': 'Test Automation','job': 'Engineer'}
     response =httpx.post(url, json=data)
@@ -50,6 +56,7 @@ def create_user_record(context):
 
 @then("verify if the user record is created as following")
 def verifying_created_record(context):
+    """Verifies if user record is created on Test API"""
     expected = dict(context.table.rows[0].as_dict())
     actual = getattr(context, "created_user_record", None)
     if actual is None:
@@ -60,6 +67,7 @@ def verifying_created_record(context):
 
 @given("user sends the api to update user record")
 def update_user_record(context):
+    """Updates user record on Test API"""
     item_id = 1
     url = f'http://127.0.0.1:8000/items/{item_id}'
     data = {'name': 'Test','price': '20','description': 'Testing PUT Method', 'tax': '20','item_id': '1'}
@@ -70,6 +78,7 @@ def update_user_record(context):
 
 @then("Verify if record is updated with following")
 def verifying_updated_record(context):
+    """Verified updated record on Test API"""
     expected =dict(context.table.rows[0].as_dict())
     actual = getattr(context, "update_user_record", None)
     if actual is None:
@@ -81,6 +90,7 @@ def verifying_updated_record(context):
 
 @given("user sends the api to delete user record")
 def delete_record(context):
+ """Deletes user record on TestAPI"""
  item_id = 1
  url = f'http://127.0.0.1:8000/items/{item_id}'
  response = httpx.delete(url)
@@ -89,6 +99,7 @@ def delete_record(context):
 
 @then("Verify if record is deleted as following")
 def verifying_deleted_message(context):
+    """Verified if user record is deleted on TestAPI"""
     expected =dict(context.table.rows[0].as_dict())
     actual = getattr(context, "delete_record", None)
 

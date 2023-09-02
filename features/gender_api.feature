@@ -1,6 +1,8 @@
+@GenderAPI
 Feature: Test Gender API
 
-    Scenario: Fetch gender with name
+    @GETMethod
+    Scenario: Fetch gender with name from the Gender API
         Given we fetch gender for mary
         When the GET request is successful
         Then the response should be
