@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "Behave Play"
+version = "0.1.0"
+description = "playing around for behave"
+authors = ["Tejaswani <tejaswani12.92@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+behave = "^1.2.6"
+httpx = "^0.24.1"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
