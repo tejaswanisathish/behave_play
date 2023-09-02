@@ -1,0 +1,12 @@
+{
+    "cSpell.words": [
+        "httpx"
+    ],
+    "cucumberautocomplete.onTypeFormat": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.steps": [
+        "features\\steps\\*"
+    ],
+    "cucumberautocomplete.syncfeatures": "features/*.feature",
+    "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
+}
